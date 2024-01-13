@@ -11,13 +11,13 @@
 
         <script src="js/script.js" defer></script>
 
-        <title>PlainLogin</title>
+        <title>LoginPage</title>
     </head>
     <body>
         <header>
             <div class="container wide">
                 <div class="inline">
-                    <h1>Plain Login</h1>
+                    <h1>Login Page</h1>
                     <?php if (isset($_SESSION['user'])) : ?>
                         <div class="options">
                             <a href="#"><?= $_SESSION['user']['name'] ?></a>

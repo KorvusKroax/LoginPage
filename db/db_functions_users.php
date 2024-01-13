@@ -1,5 +1,13 @@
 <?php
 
+    const MIN_NAME_LENGTH = 3;
+    const MIN_PASSWORD_LENGTH = 3;
+
+    if (!isTableExists("users")) createUsersTable();
+    if (!getAllUsers()) addUser('admin', 'admin@email.com', 'password');
+
+
+
     function createUsersTable()
     {
         dbQuery(
@@ -80,49 +88,49 @@
     function validateName($name)
     {
         if (empty($name)) {
-            return 'nincs név megadva';
+            return 'name is empty';
         }
 
         if (strlen($name) < MIN_NAME_LENGTH) {
-            return 'túl rövid név (min: ' . MIN_NAME_LENGTH . ' karakter)';
+            return 'too short name (min: ' . MIN_NAME_LENGTH . ' character)';
         }
 
         if (!preg_match('/^[\w\s.]+$/ui', $name)) {
-            return 'érvénytelen név (csak betűk, számok, szóköz, aláhúzás és pont használható)';
+            return 'invalid name (only letters, numbers, space, undescore and dot allowed)';
         }
 
         if (getUserByName($name)) {
-            return 'ezen a néven már létezik felhasználó';
+            return 'this name is already in use';
         }
     }
 
     function validateEmail($email)
     {
         if (empty($email)) {
-            return 'nincs email megadva';
+            return 'email is empty';
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return 'érvénytelen email';
+            return 'invalid email';
         }
 
         if (getUserByEmail($email)) {
-            return 'ez az email már használatban van';
+            return 'this email is already in use';
         }
     }
 
     function validatePassword($password, $confirmPassword)
     {
         if (empty($password)) {
-            return 'nincs jelszó megadva';
+            return 'password is empty';
         }
 
         if (strlen($password) < MIN_PASSWORD_LENGTH) {
-            return 'túl rövid jelszó (min: ' . MIN_PASSWORD_LENGTH . ' karakter)';
+            return 'too short password (min: ' . MIN_PASSWORD_LENGTH . ' character)';
         }
 
         if ($password !== $confirmPassword) {
-            return 'a két jelszó nem egyezik';
+            return 'passwords do not match';
         }
     }
 
@@ -131,18 +139,18 @@
     function validateLogin($name, $password)
     {
         if (empty($name)) {
-            return 'nincs név megadva';
+            return 'name is empty';
         }
 
         if (empty($password)) {
-            return 'nincs jelszó megadva';
+            return 'password is empty';
         }
 
         if (empty($user = getUserByName($name))) {
-            return 'nincs ilyen nevű felhasználó';
+            return 'no user with this name';
         }
 
         if (!password_verify($password, $user['password'])) {
-            return 'nem megfelelő jelszó';
+            return 'invalid password';
         }
     }

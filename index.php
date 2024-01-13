@@ -1,4 +1,5 @@
 <?php
+
     require('init.php');
 
     if ($_GET['url']) {

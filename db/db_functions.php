@@ -1,5 +1,9 @@
 <?php
 
+    if (!isDatabaseExists()) createDatabase();
+
+
+
     function isDatabaseExists()
     {
         $con = new PDO(DB_DRIVER . ':host=' . DB_HOST, DB_USER, DB_PASSWORD);
