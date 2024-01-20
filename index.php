@@ -1,15 +1,16 @@
 <?php
+    session_start();
 
-    require('init.php');
+    require('db/db_init.php');
 
     if ($_GET['url']) {
         $url = explode('/', $_GET['url']);
-        $page = 'pages/'.$url[0].'.php';
+        $page = $url[0] . '.php';
         if (file_exists($page)) {
             require($page);
         } else {
-            require('pages/404.php');
+            require('404.php');
         }
     } else {
-        require('pages/home.php');
+        require('home.php');
     }
