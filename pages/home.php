@@ -11,7 +11,7 @@
 
 <main>
     <div class="container">
-        <h2>Helló, <?= $_SESSION['user']['name'] ?>!</h2>
+        <h2>hello, <?= $_SESSION['user']['name'] ?>!</h2>
     </div>
 </main>
 

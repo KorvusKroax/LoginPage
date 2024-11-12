@@ -17,7 +17,7 @@
         <header>
             <div class="container wide">
                 <div class="inline">
-                    <h1>Login Page</h1>
+                    <h1>login page</h1>
                     <?php if (isset($_SESSION['user'])) : ?>
                         <div class="options">
                             <a href="#"><?= $_SESSION['user']['name'] ?></a>
